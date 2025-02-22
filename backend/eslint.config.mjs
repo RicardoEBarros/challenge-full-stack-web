@@ -8,7 +8,7 @@ export default [
     pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["src/**/*.ts"],
+    files: ["src/**/*.ts", "test/**/*.ts"],
     ignores: ["node_modules", "dist", "coverage"],
     plugins: {
       "@stylistic/js": stylisticJs
@@ -21,7 +21,7 @@ export default [
       "no-var": "warn",
       "indent": ["error", 2],
       "prefer-const": "warn",
-      "quotes": ["error", "single"],
+      "quotes": ["error", "double"],
       "arrow-spacing": ["error", { before: true, after: true }],
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@stylistic/js/function-call-spacing": ["error", "never"],
