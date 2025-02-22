@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+}
