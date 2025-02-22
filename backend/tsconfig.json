@@ -2,10 +2,14 @@
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",
+    "outDir": "dist",
     "target": "ES6",
+    "module": "CommonJS",
     "moduleResolution": "node",
+    "allowJs": true,
     "noEmit": true,
     "sourceMap": true,
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["*"]
     }
