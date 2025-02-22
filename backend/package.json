@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "ricardo_barros",
+  "license": "ISC",
+  "description": "API para gerenciamento de matrículas",
+  "engines": {
+    "node": "v20.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
