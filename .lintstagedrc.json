@@ -1,0 +1,6 @@
+{
+  "./backend/src/**/*.ts": [
+    "eslint --fix",
+    "npm run test-back:staged"
+  ]
+}
