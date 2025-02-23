@@ -1,7 +1,7 @@
 import { Validator } from "@/src/data/protocols/validator"
 import { HttpRequest, HttpResponse, Controller, StatusCode } from "../../protocols"
 import { AddNewRegistration } from "@/src/domain/usecases/add-new-registration"
-import { badRequest } from "../../helpers/http-helper"
+import { badRequest, internalServerError } from "../../helpers/http-helper"
 
 export class StudentRegistrationController implements Controller {
 
@@ -12,15 +12,22 @@ export class StudentRegistrationController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
 
-    const error = this.validator.validate(httpRequest.body)
-    if (error) {
-      return badRequest(error)
+    try {
+      
+      const error = this.validator.validate(httpRequest.body)
+      if (error) {
+        return badRequest(error)
+      }
+  
+      return Promise.resolve({
+        statusCode: StatusCode.ok,
+        body: null
+      })
+
+    } catch (error) {
+      return internalServerError()
     }
 
-    return Promise.resolve({
-      statusCode: StatusCode.ok,
-      body: null
-    })
   }
 
 }
