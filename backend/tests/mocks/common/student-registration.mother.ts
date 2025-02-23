@@ -3,9 +3,16 @@ import { StudentRegistrationBuilder } from "./student-registration.builder";
 
 export class StudentRegistrationObjectMother {
 
-  static valid(): StudentRegistrationModel {
+  static valid(): Record<string, any> {
     return StudentRegistrationBuilder
       .aStudentRegistrationBuilder()
+      .build()
+  }
+
+  static withoutRaField(): Record<string, any> {
+    return StudentRegistrationBuilder
+      .aStudentRegistrationBuilder()
+      .hideRa()
       .build()
   }
 

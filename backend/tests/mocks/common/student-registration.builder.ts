@@ -18,7 +18,12 @@ export class StudentRegistrationBuilder {
     return new StudentRegistrationBuilder
   }
 
-  build(): StudentRegistrationModel {
+  hideRa(): StudentRegistrationBuilder {
+    Reflect.deleteProperty(this.studentFake, "ra")
+    return this
+  }
+
+  build(): Record<string, any> {
     return this.studentFake
   }
 

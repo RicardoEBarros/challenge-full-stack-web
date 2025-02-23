@@ -18,6 +18,8 @@ export class StudentRegistrationController implements Controller {
       if (error) {
         return badRequest(error)
       }
+
+      await this.addNewRegistration.add(httpRequest.body)
   
       return Promise.resolve({
         statusCode: StatusCode.ok,
@@ -30,4 +32,4 @@ export class StudentRegistrationController implements Controller {
 
   }
 
-}
+};
