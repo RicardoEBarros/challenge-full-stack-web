@@ -49,7 +49,17 @@ describe("Student Registration Suíte", () => {
 
   })
 
-  test.todo("Shouldn't throws an error if AddNewRegistration throws")
+  test("Should return 500 if AddNewRegistration throws", async () => {
+
+    const { sut, addNewRegistrationStub } = makeStudentRegistrationControllerFactory()
+    jest.spyOn(addNewRegistrationStub, "add").mockImplementationOnce(() => { throw new Error() })
+    const httpRequest = { body: StudentRegistrationObjectMother.withoutRaField() }
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(internalServerError())
+
+  })
+
   test.todo("Should return 200 on success")
 
 })
