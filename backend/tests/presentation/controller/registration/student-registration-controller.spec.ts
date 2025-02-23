@@ -1,34 +1,14 @@
-import { Validator } from "@/src/data/protocols/validator"
-import { StudentRegistrationModel } from "@/src/domain/models/student-registration-model"
-import { AddNewRegistration } from "@/src/domain/usecases/add-new-registration"
-import { StudentRegistrationController } from "@/src/presentation/controller/registration/student-registration-controller"
+import { StudentRegistrationObjectMother } from "@/tests/mocks/common/student-registration.mother"
+import { makeStudentRegistrationControllerFactory } from "@/tests/mocks/factories/presentation/controllers/student-registration-controller.factory"
 import { describe, test, expect, jest } from "@jest/globals"
 
 describe("Student Registration Suíte", () => {
 
   test("Should call Validator with correct values", async () => {
 
-    class ValidatorStub implements Validator {
-
-      validate(): Error | null {
-        return null
-      }
-      
-    }
-
-    class AddNewRegistrationStub implements AddNewRegistration {
-      
-      async add(params: StudentRegistrationModel): Promise<void> {
-        Promise.resolve(null)
-      }
-      
-    }
-
-    const validatorStub = new ValidatorStub()
-    const addNewRegistrationStub = new AddNewRegistrationStub() 
+    const { sut, validatorStub } = makeStudentRegistrationControllerFactory()
     const validateSpy = jest.spyOn(validatorStub, 'validate')
-    const sut = new StudentRegistrationController(validatorStub, addNewRegistrationStub)
-    const httpRequest = { body: { name: "any_name", cpf: "any_cpf" } }
+    const httpRequest = { body: StudentRegistrationObjectMother.valid() }
     await sut.handle(httpRequest)
 
     expect(validateSpy).toHaveBeenNthCalledWith(1, httpRequest.body)
