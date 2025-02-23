@@ -1,5 +1,5 @@
 export interface StudentRegistrationModel {
-  nome: string,
+  name: string,
   email: string,
   ra: number,
   cpf: string
