@@ -1,19 +1,18 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import stylisticJs from "@stylistic/eslint-plugin"
+const globals = require("globals")
+const pluginJs = require("@eslint/js")
+const tseslint = require("typescript-eslint")
+const stylisticJs = require("@stylistic/eslint-plugin")
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-    pluginJs.configs.recommended,
+module.exports = [
+  pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  {
-    files: ["src/**/*.ts", "test/**/*.ts"],
-    ignores: ["node_modules", "dist", "coverage"],
+  { 
+    files: ["src/**/*.ts", 'tests/**/*.ts'],
+    ignores: ["node_modules", "dist", "coverage", "data"],
     plugins: {
-      "@stylistic/js": stylisticJs
+      '@stylistic/js': stylisticJs
     },
-    rules: {  
+    rules: {
       "semi": ["error", "never"],
       "eqeqeq": "error",
       "no-eval": "error",
@@ -21,7 +20,7 @@ export default [
       "no-var": "warn",
       "indent": ["error", 2],
       "prefer-const": "warn",
-      "quotes": ["error", "double"],
+      "quotes": ["error", "single"],
       "arrow-spacing": ["error", { before: true, after: true }],
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@stylistic/js/function-call-spacing": ["error", "never"],
@@ -30,10 +29,12 @@ export default [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off"
     },
-  },
-  {
     languageOptions: { 
-      globals: globals.browser 
+      globals: globals.browser,
+      parserOptions: {
+        project: "tsconfig-eslint.json",
+        tsconfigRootDir: "."
+      }
     }
-  },
+  }
 ];
