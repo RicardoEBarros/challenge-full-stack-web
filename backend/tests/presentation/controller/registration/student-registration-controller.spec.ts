@@ -1,4 +1,4 @@
-import { badRequest } from "@/src/presentation/helpers/http-helper"
+import { badRequest, internalServerError } from "@/src/presentation/helpers/http-helper"
 import { StudentRegistrationObjectMother } from "@/tests/mocks/common/student-registration.mother"
 import { makeStudentRegistrationControllerFactory } from "@/tests/mocks/factories/presentation/controllers/student-registration-controller.factory"
 import { describe, test, expect, jest } from "@jest/globals"
@@ -27,7 +27,17 @@ describe("Student Registration Suíte", () => {
 
   })
 
-  test.todo("Should't throws an error if Validator throws")
+  test("Should return 500 if Validator throws", async () => {
+
+    const { sut, validatorStub } = makeStudentRegistrationControllerFactory()
+    jest.spyOn(validatorStub, 'validate').mockImplementationOnce(() => { throw new Error() })
+    const httpRequest = { body: StudentRegistrationObjectMother.valid() }
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(internalServerError())
+
+  })
+
   test.todo("Should call AddRegistration with correct values")
   test.todo("Shouldn't throws an error if AddRegistration throws")
   test.todo("Should return 200 on success")
