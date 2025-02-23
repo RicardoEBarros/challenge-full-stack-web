@@ -1,5 +1,5 @@
-import { StudentRegistrationModel } from "../models/student-registration-model"
+import { StudentCreationModel } from "../models/student-creation-model"
 
 export interface AddNewRegistration {
-  add(params: StudentRegistrationModel): Promise<void>
+  add(params: StudentCreationModel): Promise<void>
 }
