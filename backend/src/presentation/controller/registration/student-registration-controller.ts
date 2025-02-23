@@ -1,7 +1,7 @@
 import { Validator } from "@/src/data/protocols/validator"
 import { HttpRequest, HttpResponse, Controller, StatusCode } from "../../protocols"
 import { AddNewRegistration } from "@/src/domain/usecases/add-new-registration"
-import { badRequest, internalServerError } from "../../helpers/http-helper"
+import { badRequest, internalServerError, ok } from "../../helpers/http-helper"
 
 export class StudentRegistrationController implements Controller {
 
@@ -19,12 +19,9 @@ export class StudentRegistrationController implements Controller {
         return badRequest(error)
       }
 
-      await this.addNewRegistration.add(httpRequest.body)
+      const registration = await this.addNewRegistration.add(httpRequest.body)
   
-      return Promise.resolve({
-        statusCode: StatusCode.ok,
-        body: null
-      })
+      return ok(registration)
 
     } catch (error) {
       return internalServerError()
@@ -32,4 +29,4 @@ export class StudentRegistrationController implements Controller {
 
   }
 
-};
+}

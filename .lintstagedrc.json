@@ -1,6 +1,6 @@
 {
   "./backend/src/**/*.ts": [
-    "eslint './backend/src/**' --fix",
+    "eslint --fix",
     "npm run test-back:staged"
   ]
 }
