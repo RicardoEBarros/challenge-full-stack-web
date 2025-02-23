@@ -1,9 +1,9 @@
-import { StudentRegistrationModel } from "@/src/domain/models/student-registration-model";
-import { StudentRegistrationBuilder } from "./student-registration.builder";
+import { StudentRegistrationModel } from "@/src/domain/models/student-registration-model"
+import { StudentRegistrationBuilder } from "./student-registration.builder"
 
 export class StudentRegistrationObjectMother {
 
-  static valid(): Record<string, any> {
+  static valid(): StudentRegistrationModel  {
     return StudentRegistrationBuilder
       .aStudentRegistrationBuilder()
       .build()

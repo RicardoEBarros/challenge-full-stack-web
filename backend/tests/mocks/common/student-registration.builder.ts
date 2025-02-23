@@ -23,7 +23,7 @@ export class StudentRegistrationBuilder {
     return this
   }
 
-  build(): Record<string, any> {
+  build(): StudentRegistrationModel {
     return this.studentFake
   }
 

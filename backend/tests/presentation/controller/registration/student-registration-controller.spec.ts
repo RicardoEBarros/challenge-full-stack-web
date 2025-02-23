@@ -1,4 +1,4 @@
-import { badRequest, internalServerError } from "@/src/presentation/helpers/http-helper"
+import { badRequest, internalServerError, ok } from "@/src/presentation/helpers/http-helper"
 import { StudentRegistrationObjectMother } from "@/tests/mocks/common/student-registration.mother"
 import { makeStudentRegistrationControllerFactory } from "@/tests/mocks/factories/presentation/controllers/student-registration-controller.factory"
 import { describe, test, expect, jest } from "@jest/globals"
@@ -60,6 +60,16 @@ describe("Student Registration Suíte", () => {
 
   })
 
-  test.todo("Should return 200 on success")
+  test("Should return 200 on success", async () => {
+
+    const { sut, addNewRegistrationStub } = makeStudentRegistrationControllerFactory()
+    const studentRegistrationFake = StudentRegistrationObjectMother.valid()
+    jest.spyOn(addNewRegistrationStub, "add").mockResolvedValueOnce(studentRegistrationFake)
+    const httpRequest = { body: StudentRegistrationObjectMother.withoutRaField() }
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(ok(studentRegistrationFake)) 
+
+  })
 
 })

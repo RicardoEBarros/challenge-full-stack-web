@@ -8,7 +8,7 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["./backend/src/**/*.ts", "backend/tests/**/*.ts"],
+    files: ["./backend/src/**/*.ts", "./backend/tests/**/*.ts"],
     ignores: ["node_modules", "dist", "coverage"],
     plugins: {
       '@stylistic/js': stylisticJs
