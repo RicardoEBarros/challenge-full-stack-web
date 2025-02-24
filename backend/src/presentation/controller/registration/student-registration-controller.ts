@@ -23,7 +23,7 @@ export class StudentRegistrationController implements Controller {
   
       return ok(registration)
 
-    } catch (error) {
+    } catch {
       return internalServerError()
     }
 
