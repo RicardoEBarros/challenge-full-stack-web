@@ -40,8 +40,8 @@ describe("Student Registration Suíte", () => {
 
   test("Should call AddNewRegistration with correct values", async () => {
 
-    const { sut, addNewRegistrationStub } = makeStudentRegistrationControllerFactory()
-    const addSpy = jest.spyOn(addNewRegistrationStub, "add")
+    const { sut, dbAddRegistrationPostgresRepositoryStub } = makeStudentRegistrationControllerFactory()
+    const addSpy = jest.spyOn(dbAddRegistrationPostgresRepositoryStub, "add")
     const httpRequest = { body: StudentRegistrationObjectMother.withoutRaField() }
     await sut.handle(httpRequest)
 
@@ -51,8 +51,8 @@ describe("Student Registration Suíte", () => {
 
   test("Should return 500 if AddNewRegistration throws", async () => {
 
-    const { sut, addNewRegistrationStub } = makeStudentRegistrationControllerFactory()
-    jest.spyOn(addNewRegistrationStub, "add").mockImplementationOnce(() => { throw new Error() })
+    const { sut, dbAddRegistrationPostgresRepositoryStub } = makeStudentRegistrationControllerFactory()
+    jest.spyOn(dbAddRegistrationPostgresRepositoryStub, "add").mockImplementationOnce(() => { throw new Error() })
     const httpRequest = { body: StudentRegistrationObjectMother.withoutRaField() }
     const httpResponse = await sut.handle(httpRequest)
 
@@ -62,9 +62,9 @@ describe("Student Registration Suíte", () => {
 
   test("Should return 200 on success", async () => {
 
-    const { sut, addNewRegistrationStub } = makeStudentRegistrationControllerFactory()
+    const { sut, dbAddRegistrationPostgresRepositoryStub } = makeStudentRegistrationControllerFactory()
     const studentRegistrationFake = StudentRegistrationObjectMother.valid()
-    jest.spyOn(addNewRegistrationStub, "add").mockResolvedValueOnce(studentRegistrationFake)
+    jest.spyOn(dbAddRegistrationPostgresRepositoryStub, "add").mockResolvedValueOnce(studentRegistrationFake)
     const httpRequest = { body: StudentRegistrationObjectMother.withoutRaField() }
     const httpResponse = await sut.handle(httpRequest)
 

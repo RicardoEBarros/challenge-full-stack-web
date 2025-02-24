@@ -1,4 +1,5 @@
 import { Validator } from "@/src/data/protocols/validator"
+import { StudentRegistrationModel } from "@/src/domain/models/student-registration-model"
 import { AddNewRegistration } from "@/src/domain/usecases/add-new-registration"
 import { StudentRegistrationController } from "@/src/presentation/controller/registration/student-registration-controller"
 import { Controller } from "@/src/presentation/protocols"
@@ -8,16 +9,16 @@ import { ValidatorStub } from "@/tests/mocks/stubs/presentation/controller/valid
 interface SutStudentRegistrationType {
   sut: Controller,
   validatorStub: Validator,
-  addNewRegistrationStub: AddNewRegistration
+  dbAddRegistrationPostgresRepositoryStub: AddNewRegistration<StudentRegistrationModel>
 }
 
 export const makeStudentRegistrationControllerFactory = (): SutStudentRegistrationType => {
   const validatorStub = new ValidatorStub()
-  const addNewRegistrationStub = new DbAddRegistrationPostgresRepositoryStub() 
-  const sut = new StudentRegistrationController(validatorStub, addNewRegistrationStub)
+  const dbAddRegistrationPostgresRepositoryStub = new DbAddRegistrationPostgresRepositoryStub<StudentRegistrationModel>() 
+  const sut = new StudentRegistrationController(validatorStub, dbAddRegistrationPostgresRepositoryStub)
   return {
     sut, 
     validatorStub,
-    addNewRegistrationStub
+    dbAddRegistrationPostgresRepositoryStub
   }
 }

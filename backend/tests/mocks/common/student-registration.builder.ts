@@ -1,5 +1,4 @@
 import { StudentRegistrationModel } from "@/src/domain/models/student-registration-model"
-import faker from "faker"
 
 export class StudentRegistrationBuilder {
 
@@ -7,10 +6,10 @@ export class StudentRegistrationBuilder {
 
   constructor() {
     this.studentFake = {
-      name: faker.name.firstName(),
-      email: faker.internet.email(),
-      cpf: faker.random.alphaNumeric(11),
-      ra: faker.random.number({ max: 5 })
+      name: "any_name",
+      email: "any_email@mail.com",
+      cpf: "any_cpf",
+      ra: 1234
     }
   }
 

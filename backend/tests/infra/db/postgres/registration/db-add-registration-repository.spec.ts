@@ -27,6 +27,14 @@ describe("Db Add Registration Postgres Repository Suíte", () => {
 
   })
   
-  test.todo("Should return an registration on success")
+  test("Should return a student registration on success", async () => {
+
+    const { sut } = makeDbAddRegistrationRepositoryFactory()
+    const registrationFake = StudentRegistrationObjectMother.withoutRaField()
+    const newRegistration = await sut.add(registrationFake)
+
+    expect(newRegistration).toEqual(StudentRegistrationObjectMother.valid())
+
+  })
 
 })
