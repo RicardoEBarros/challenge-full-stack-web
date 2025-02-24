@@ -1,3 +1,3 @@
-export interface DbAddNewRegister {
-  create(params: Record<string, unknown>): Promise<Record<string, unknown>>
+export interface DbAddNewRegister<T> {
+  create(params: Record<string, unknown>): Promise<T>
 }
