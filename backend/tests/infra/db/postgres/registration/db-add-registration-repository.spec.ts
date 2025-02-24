@@ -16,7 +16,16 @@ describe("Db Add Registration Postgres Repository Suíte", () => {
 
   })
 
-  test.todo("Should throw 500 if DbAddNewRegister fails")
+  test("Should throw 500 if PrismaAdapter fails", async () => {
+
+    const { sut, prismaAdapterStub } = makeDbAddRegistrationRepositoryFactory()
+    jest.spyOn(prismaAdapterStub, "create").mockRejectedValueOnce(new Error())
+    const registrationFake = StudentRegistrationObjectMother.withoutRaField()
+    const promise = sut.add(registrationFake)
+
+    await expect(promise).rejects.toThrow()
+
+  })
   
   test.todo("Should return an registration on success")
 
