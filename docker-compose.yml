@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:17.4-alpine3.21
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: grupo_a
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - wpp-net
+  
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    depends_on:
+      - db
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: root 
+    ports:
+      - 5051:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - wpp-net
+
+volumes:
+  pg_data:
+  pgadmin_data:
+
+networks:
+  wpp-net:
+    driver: bridge
+
+

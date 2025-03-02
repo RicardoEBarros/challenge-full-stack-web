@@ -10,6 +10,8 @@
   "scripts": {
     "test-back:staged": "cd ./backend && npm run test:staged",
     "test-back:ci": "cd ./backend && npm run test:ci",
+    "down": "docker-compose down",
+    "up": "docker-compose up -d",
     "prepare": "husky"
   },
   "dependencies": {
