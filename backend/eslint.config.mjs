@@ -33,7 +33,11 @@ export default [
   },
   {
     languageOptions: { 
-      globals: globals.browser
+      globals: globals.browser,
+      parserOptions: {
+        project: "tsconfig-eslint.json",
+        tsconfigRootDir: ".",
+      }
     }
   },
 ];
